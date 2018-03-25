@@ -50,10 +50,13 @@ class MsgHandler:
         result = {}
         result["user_id"] = row[0]
         result["first_name"] = row[1]
-        #Implement later
-        # result["last_name"] = row[2]
-        # result["email"] = row[3]
-        # result["phone"] = row[4]
+        result["second_name"] = row[2]
+        result["email"] = row[3]
+        result["phone"] = row[4]
+        #Before loop
+        # result = {}
+        # result["user_id"] = row[0]
+        # result["first_name"] = row[1]
         return result
 
     def getTextByMsgId(self, msg_id):

@@ -1,6 +1,7 @@
 from flask import Flask, request
 #los py files del handler folder
 from handler.messages import MsgHandler
+from handler.users import UserHandler
 
 app = Flask(__name__)
 
@@ -42,26 +43,36 @@ def getLikesByMsgId(msg_id):
 def getDislikesByMsgId(msg_id):
     return MsgHandler().getDislikesByMsgId(msg_id)
 
+#get all of the users
+@app.route("/MessagingApp/user")
+def user():
+    handler = UserHandler()
+    return handler.getAllUser()
+
+@app.route("/MessagingApp/user/<int:id>")
+def getUserById(id):
+    return UserHandler().getUserById(id)
+
+@app.route("/MessagingApp/user/fname/<int:id>")
+def getFNameByUserId(id):
+    print("DEBUG - main")
+    handler = UserHandler()
+    return handler.getFNameByUserId(id) #Doesn't work with UserHandler().getFNameByUserId(id) for some reason...
+
+@app.route("/MessagingApp/user/lname/<int:id>")
+def getLNameByUserId(id):
+    handler = UserHandler()
+    return handler.getLNameByUserId(id)
+
+@app.route("/MessagingApp/user/email/<int:id>")
+def getEmailByUserId(id):
+    handler = UserHandler()
+    return handler.getEmailByUserId(id)
+
+@app.route("/MessagingApp/user/phone/<int:id>")
+def getPhoneByUserId(id):
+    handler = UserHandler()
+    return handler.getPhoneByUserId(id)
+
 if __name__ == '__main__':
     app.run()
-
-#######################################################################
-#Lo del profe
-# @app.route('/PartApp/parts')
-# def parts():
-#     if request.args:
-#         return PartHandelr().searchParts(request.args)
-#     else:
-#         handler = PartHandelr()
-#         return handler.getAllParts()
-#
-# @app.route('/PartApp/parts/<int:pid>')
-# def getPartById(pid):
-#     return PartHandelr().getPartById(pid)
-#
-# @app.route('/PartApp/parts/<int:pid>/suppliers')
-# def getSuppliersPartById(pid):
-#     return PartHandelr().getSuppliersByPartId(pid)
-#
-# if __name__ == '__main__':
-#     app.run()
